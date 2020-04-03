@@ -1,7 +1,7 @@
 const baseURL = "https://www.thesportsdb.com/api/v1/json/1/searchteams.php";
 let url;
 
-const searchTerm = document.querySelector(".searchTerm");
+const search_input = document.querySelector(".search_input");
 const search = document.querySelector("form");
 const list = document.getElementById("results");
 
@@ -12,7 +12,7 @@ search.addEventListener("submit", fetchResults);
 
 function fetchResults(e) {
     e.preventDefault();
-    url = baseURL + "?t=" +searchTerm.value.split(" ").join("_");
+    url = baseURL + "?t=" +search_input.value.split(" ").join("_");
     console.log(url);
 
     fetch(url).then(function (result) {
@@ -31,7 +31,7 @@ function displayResults(json) {
   let teamInfo = json.teams.forEach(p => {
 
             let teamsDiv = document.createElement("div");
-            let infoHolder = document.createElement("div");
+            let info = document.createElement("div");
             let teams = document.createElement("h5");
             let teamsBadge = document.createElement("img");
             let teamsName = document.createElement("p");
@@ -41,42 +41,38 @@ function displayResults(json) {
             let teamsFormedYear = document.createElement("p");
             let teamsDescriptionEN = document.createElement("p");
             //let teamStadium = document.createElement("p");
-            let teamsWebsite = document.createElement("p");
 
-            teams.innerText = "Team Name: " + p.strTeam;
-            teamsSport.innerText = "Sport: " + p.strSport;
-            teamsLeague.innerText = "League: " + p.strLeague;
-            teamsCountry.innerText = "Country: " + p.strCountry;
-            teamsFormedYear.innerText = "Year Formed: " + p.intFormedYear;
-            teamsDescriptionEN.innerText = "About Team: " + p.strDescriptionEN;
-            teamsWebsite.innerText = "Website: " + p.strWebsite;
+            teams.innerText = p.strTeam;
+            teamsSport.innerHTML = "<b>Sport: </b>" + p.strSport;
+            teamsLeague.innerHTML = "<b>League: </b>" + p.strLeague;
+            teamsCountry.innerHTML = "<b>Country: </b>" + p.strCountry;
+            teamsFormedYear.innerHTML = "<b>Year Formed: </b>" + p.intFormedYear;
+            teamsDescriptionEN.innerHTML = "<b>About Team: </b>" + p.strDescriptionEN;
             teamsBadge.src = p.strTeamBadge;
             teamsBadge.height = 100;
             teamsBadge.width = 100;
             
             list.appendChild(teamsDiv);
-            teamsDiv.appendChild(infoHolder);
-            infoHolder.appendChild(teams);
-            infoHolder.appendChild(teamsName);
-            infoHolder.appendChild(teamsSport);
-            infoHolder.appendChild(teamsLeague);
-            infoHolder.appendChild(teamsCountry);
-            infoHolder.appendChild(teamsFormedYear);
-            infoHolder.appendChild(teamsDescriptionEN);
-            infoHolder.appendChild(teamsWebsite);
-            infoHolder.appendChild(teamsBadge);
+            teamsDiv.appendChild(info);
+            info.appendChild(teams);
+            info.appendChild(teamsName);
+            info.appendChild(teamsSport);
+            info.appendChild(teamsLeague);
+            info.appendChild(teamsCountry);
+            info.appendChild(teamsFormedYear);
+            info.appendChild(teamsDescriptionEN);
+            info.appendChild(teamsBadge);
 
             teamsDiv.className = "teamsDiv";
-            infoHolder.className = "infoHolder";
+            info.className = "info";
             teams.className = "teams";
-            teamsName.className = "info";
-            teamsSport.className = "info";
-            teamsLeague.className = "info";
-            teamsCountry.className = "info";
-            teamsFormedYear.className = "info";
-            teamsDescriptionEN.className = "info";
-            teamsWebsite.className = "info";
-            teamsBadge.className = "info";
+            teamsName.className = "name";
+            teamsSport.className = "sport";
+            teamsLeague.className = "league";
+            teamsCountry.className = "country";
+            teamsFormedYear.className = "formed";
+            teamsDescriptionEN.className = "description";
+            teamsBadge.className = "badge";
 
             
         });
