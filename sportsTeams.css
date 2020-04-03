@@ -1,5 +1,5 @@
 body {
-    background-image: url('../apichallenge/background1.png');
+    background-image: url('./assets/background.png');
     background-repeat: no-repeat;
     background-color:white;
     max-width:100%;
